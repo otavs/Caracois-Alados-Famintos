@@ -7,7 +7,7 @@ Caracol::Caracol(int x, int y, int velocidade, int altura, int largura){
     this->altura = altura;
     this->largura = largura;
 
-    this->desejo = aleatorio(0, 3);
+    this->desejo = aleatorio(0, 3); // aleatório!
 
     if(desejo == chocolate)
         imagem = al_load_bitmap("c_chocolate.png");
@@ -70,6 +70,14 @@ int Caracol::getDesejo(){
 }
 void Caracol::setDesejo(int desejo){
 	this->desejo = desejo;
+	if(desejo == chocolate)
+        imagem = al_load_bitmap("c_chocolate.png");
+    else if(desejo == sushi)
+        imagem = al_load_bitmap("c_sushi.png");
+    else if(desejo == pizza)
+        imagem = al_load_bitmap("c_pizza.png");
+    else if(desejo == hotdog)
+        imagem = al_load_bitmap("c_hotdog.png");
 }
 
 
