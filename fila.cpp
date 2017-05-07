@@ -50,8 +50,6 @@ bool Fila<T>::remove(){
 
 template <class T>
 T Fila<T>::primeiroElem(){
-	if(this->vazia())
-		return 0;
 	return this->vetor[this->primeiro];
 }
 
@@ -67,8 +65,6 @@ int Fila<T>::getNumElementos(){
 
 template <class T>
 T Fila<T>::operator[](int i){
-	if(i >= this->numElementos)
-		return 0;
 	if(i < this->tam-this->primeiro)
 		return this->vetor[this->primeiro+i];
 	else
