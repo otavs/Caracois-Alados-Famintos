@@ -4,12 +4,13 @@
 
 #include "includes.h"
 
-template <class T>
+template <class T> 
 class Fila{
 	private:
 		T *vetor;
 		int primeiro, ultimo, tam, numElementos;
 	public:
+		Fila();
 		Fila(int);				// construtor
 		bool vazia();			// verifica se está vazia
 		bool cheia();			// verifica se está cheia

@@ -1,18 +1,18 @@
-#ifndef CARACOL_H
-#define CARACOL_H
+#ifndef COMIDA_H
+#define COMIDA_H
 
 #include "includes.h"
 
-class Caracol{
+class Comida{
 
     int x, y, velocidade, altura, largura;
     ALLEGRO_BITMAP *imagem;
-    int desejo; 
+    int tipo;
 
     public:
-    Caracol();
-    Caracol(int x, int y, int velocidade, int altura, int largura);
-    ~Caracol();
+    Comida();
+    Comida(int x, int y, int velocidade, int altura, int largura);
+    ~Comida();
     void andar();
     void desenhar();
 
@@ -26,9 +26,8 @@ class Caracol{
 	void setAltura(int);
 	int getLargura();
 	void setLargura(int);
-	int getDesejo();
-	void setDesejo(int);
-	ALLEGRO_BITMAP* getImagem();
+	int getTipo();
+	void setTipo(int);
 
 };
 

@@ -1,8 +1,5 @@
-#include "fila.h"
-#include "caminho.h"
-#include "caracol.h"
-
 #include "includes.h"
+#include "caminho.h"
 
 int main(){
 
@@ -11,10 +8,16 @@ int main(){
 	int altura = 540; // altura da tela
 	bool acabou = false; // variável que controla o loop do jogo
 	int numCaminhos = 4; // número de caminhos
+	int fps = 60;
+	int numCaracois = 100;
+	int tempoSpawn = 120;
+	int contador = 120;
+	int seletor = 0;
 
 	// declaração de variáveis da allegro
 	ALLEGRO_DISPLAY *tela = NULL;
 	ALLEGRO_EVENT_QUEUE *filaEventos = NULL;
+	ALLEGRO_TIMER *timer = NULL;
 
 	// criação dos 4 caminhos
 	Caminho *caminho[numCaminhos];
@@ -28,39 +31,73 @@ int main(){
 	al_init(); // inicializa a allegro
     al_install_keyboard();
 	al_init_image_addon();
+	al_init_primitives_addon();
 
 	tela = al_create_display(largura, altura); //cria a janela
+	
+	timer = al_create_timer(1.0 / fps);
 	
 	filaEventos = al_create_event_queue(); // cria a fila de eventos
  
 	// registra fontes de eventos na fila de eventos
 	al_register_event_source(filaEventos, al_get_display_event_source(tela));
 	al_register_event_source(filaEventos, al_get_keyboard_event_source());
-
+	al_register_event_source(filaEventos, al_get_timer_event_source(timer));
+	
+	al_start_timer(timer); 
+	
 	// loop do jogo
 	while(!acabou){
-
 		ALLEGRO_EVENT evento; // cria variável de evento
 		al_wait_for_event(filaEventos, &evento); // espera por algum evento
-
-		if(evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE){ // evento disparado quando clicamos no X da tela
+		if(evento.type == ALLEGRO_EVENT_TIMER){
+			contador--;
+			if(contador == 0){
+				caminho[aleatorio(0,3)]->adicionarCaracol();
+				contador = aleatorio(0, tempoSpawn);
+			}
+			for(int i = 0; i < numCaminhos; i++){
+				caminho[i]->atualizarCaracois();
+				caminho[i]->atualizarComidas();
+				caminho[i]->desenharCaracois();
+				caminho[i]->desenharComidas();
+			}
+			caminho[seletor]->desenhar();
+			al_flip_display();
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+		}
+		else if(evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE){ // evento disparado quando clicamos no X da tela
 			acabou = true;
 		}
+		
 		else if(evento.type == ALLEGRO_EVENT_KEY_DOWN){ // evento disparado quando uma tecla é pressionada
 			switch(evento.keyboard.keycode){ // verifica qual tecla foi pressionada
 				case ALLEGRO_KEY_ESCAPE:
 					acabou = true;
 					break;
 				case ALLEGRO_KEY_UP:
-					
-					Caracol c(100, 100, 2, 100, 100);
-					c.setDesejo(hotdog); // o desejo é gerado aleatoriamente no construtor, mas aqui setamos como hotdog apenas para testar a imagem
-					c.desenhar();
-					al_flip_display();
-					
+					seletor--;
+					if(seletor < 0)
+						seletor = 0;
 					break;
-
+				case ALLEGRO_KEY_DOWN:
+					seletor++;
+					if(seletor > numCaminhos-1)
+						seletor = numCaminhos-1;
+					break;
+				case ALLEGRO_KEY_LEFT:
+					cout << seletor << endl;
+					break;
+				case ALLEGRO_KEY_RIGHT:
+					caminho[3]->adicionarCaracol();
+					break;
+				case ALLEGRO_KEY_Q:
+					caminho[seletor]->adicionarComida();
+					break;
+				
+				
 			}
+
 		}
 
 	}
@@ -68,3 +105,9 @@ int main(){
 	return 0;
 
 }
+
+
+
+
+
+

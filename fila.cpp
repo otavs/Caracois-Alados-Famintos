@@ -1,72 +1,84 @@
 #include "fila.h"
 
-template <class T>
+template <class T> 
+Fila<T>::Fila(){
+	vetor = NULL;
+	primeiro = -1;
+	ultimo = -1;
+	tam = 0;
+	numElementos = 0;
+}
+
+template <class T> 
 Fila<T>::Fila(int tam){
-	this->vetor = new T[tam];
-	this->primeiro = -1;
-	this->ultimo = -1;
+	vetor = new T[tam];
+	primeiro = -1;
+	ultimo = -1;
 	this->tam = tam;
-	this->numElementos = 0;
+	numElementos = 0;
 }
 
 template <class T>
 bool Fila<T>::vazia(){
-	if(this->numElementos == 0)
+	if(numElementos == 0)
 		return true;
 	return false;
 }
 
 template <class T>
 bool Fila<T>::cheia(){
-	if(this->numElementos == this->tam)
+	if(numElementos == tam)
 		return true;
 	return false;
 }
 
 template <class T>
 bool Fila<T>::insere(T elem){
-	if(this->cheia())
+	if(cheia())
 		return false;
-	if(this->primeiro == -1)
-		this->primeiro++;
-	this->ultimo++;
-	if(this->ultimo == this->tam)
-		this->ultimo = 0;
-	this->vetor[this->ultimo] = elem;
-	this->numElementos++;
+	if(primeiro == -1)
+		primeiro++;
+	ultimo++;
+	if(ultimo == tam)
+		ultimo = 0;
+	vetor[ultimo] = elem;
+	numElementos++;
 	return true;
 }
 
 template <class T>
 bool Fila<T>::remove(){
-	if(this->vazia())
+	if(vazia())
 		return false;
-	this->primeiro++;
-	if(this->primeiro == this->tam)
-		this->primeiro = 0;
-	this->numElementos--;
+	primeiro++;
+	if(primeiro == tam)
+		primeiro = 0;
+	numElementos--;
 	return true;
 }
 
 template <class T>
 T Fila<T>::primeiroElem(){
-	return this->vetor[this->primeiro];
+	return vetor[primeiro];
 }
 
 template <class T>
 int Fila<T>::getTam(){
-	return this->tam;
+	return tam;
 }
 
 template <class T>
 int Fila<T>::getNumElementos(){
-	return this->numElementos;
+	return numElementos;
 }
 
 template <class T>
 T Fila<T>::operator[](int i){
-	if(i < this->tam-this->primeiro)
-		return this->vetor[this->primeiro+i];
+	if(i < tam-primeiro)
+		return vetor[primeiro+i];
 	else
-		return this->vetor[i-(this->tam-this->primeiro)];
+		return vetor[i-(tam-primeiro)];
 }
+
+template class Fila<Caracol*>;
+template class Fila<Comida*>;

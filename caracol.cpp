@@ -1,5 +1,25 @@
 #include "caracol.h"
 
+Caracol::Caracol(){
+	this->x = 0;
+    this->y = 0;
+    this->velocidade = 0;
+    this->altura = 0;
+    this->largura = 0;
+
+	this->desejo = aleatorio(0, 3); // aleatório!
+	
+    if(desejo == chocolate)
+        imagem = al_load_bitmap("c_chocolate.png");
+    else if(desejo == sushi)
+        imagem = al_load_bitmap("c_sushi.png");
+    else if(desejo == pizza)
+        imagem = al_load_bitmap("c_pizza.png");
+    else if(desejo == hotdog)
+        imagem = al_load_bitmap("c_hotdog.png");
+
+}
+
 Caracol::Caracol(int x, int y, int velocidade, int altura, int largura){
     this->x = x;
     this->y = y;
@@ -7,18 +27,23 @@ Caracol::Caracol(int x, int y, int velocidade, int altura, int largura){
     this->altura = altura;
     this->largura = largura;
 
-    this->desejo = aleatorio(0, 3); // aleatório!
-
+    // this->desejo = aleatorio(0, 3); // aleatório!
+	this->desejo = hotdog;
+	
     if(desejo == chocolate)
         imagem = al_load_bitmap("c_chocolate.png");
     else if(desejo == sushi)
         imagem = al_load_bitmap("c_sushi.png");
     else if(desejo == pizza)
         imagem = al_load_bitmap("c_pizza.png");
-    else if(desejo == hotdog){
+    else if(desejo == hotdog)
         imagem = al_load_bitmap("c_hotdog.png");
-    }
 }
+
+Caracol::~Caracol(){
+	al_destroy_bitmap(imagem);
+}
+    
 
 void Caracol::andar(){
     x += velocidade;
@@ -26,6 +51,7 @@ void Caracol::andar(){
 
 void Caracol::desenhar(){
     al_draw_bitmap(imagem, x-largura/2, y-altura/2, 0);
+    //al_convert_mask_to_alpha(imagem, al_map_rgb(255, 0, 0));
 }
 
 // getters e setters:
@@ -80,4 +106,6 @@ void Caracol::setDesejo(int desejo){
         imagem = al_load_bitmap("c_hotdog.png");
 }
 
-
+ALLEGRO_BITMAP* Caracol::getImagem(){
+	return imagem;
+}

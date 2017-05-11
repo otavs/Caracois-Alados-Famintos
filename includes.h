@@ -3,11 +3,16 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
-
+#include <allegro5/allegro_primitives.h>
+ 
 #include <string>
 #include <iostream>
 #include <ctime>
 #include <cmath>
+
+#include "fila.h"
+#include "caracol.h"
+#include "comida.h"
 
 using namespace std;
 
