@@ -20,4 +20,6 @@ enum comida{chocolate, pizza, hotdog, sushi};
 
 int aleatorio(int min, int max); // retorna um int aleatório no intervalo de min até max;
 
+enum estados{menu, jogando, gameover};
+
 #endif

@@ -64,8 +64,8 @@ void Caminho::atualizarCaracois(){
 	}
 }
 
-void Caminho::adicionarComida(){
-	filaComidas.insere(new Comida(x1, y0+(y1-y0)/2, -5, 35, 25));
+void Caminho::adicionarComida(int tipo){
+	filaComidas.insere(new Comida(x1, y0+(y1-y0)/2, -13, 35, 25, tipo));
 }
 
 void Caminho::removerComida(){
@@ -87,5 +87,33 @@ void Caminho::atualizarComidas(){
 
 void Caminho::desenhar(){
 	al_draw_rectangle(x0, y0, x1, y1, al_map_rgb(0, 255, 50), 2);
+	al_draw_bitmap(img_alien, x1-100, y0 , 0);
 }
 
+void Caminho::verificaColisoes(){
+	if (!filaCaracois.vazia() && !filaComidas.vazia()){
+		if(filaCaracois.primeiroElem()->getX() > filaComidas.primeiroElem()->getX()){
+			if(filaCaracois.primeiroElem()->getDesejo() == filaComidas.primeiroElem()->getTipo()){
+				this->removerCaracol();
+				this->removerComida();
+			}
+			else{
+				this->removerComida();
+			}
+		}
+	}
+	if(!filaCaracois.vazia()){
+		if(filaCaracois.primeiroElem()->getX() > 600)
+			this->removerCaracol();
+	}
+	if(!filaComidas.vazia()){
+		if(filaComidas.primeiroElem()->getX() < 0)
+			this->removerComida();
+	}
+}
+
+ALLEGRO_BITMAP* Caminho::img_alien = NULL;
+
+void Caminho::inicializarImagens(){
+	img_alien = al_load_bitmap("alien.png");
+}

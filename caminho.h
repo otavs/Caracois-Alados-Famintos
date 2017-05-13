@@ -8,6 +8,8 @@ class Caminho{
     int x0, y0, x1, y1;
     Fila<Caracol*> filaCaracois;
     Fila<Comida*> filaComidas;
+    
+    static ALLEGRO_BITMAP *img_alien;
 
     public:
     Caminho(int x0, int y0, int x1, int y1);
@@ -26,12 +28,15 @@ class Caminho{
     void desenharCaracois();
     void atualizarCaracois();
     
-    void adicionarComida();
+    void adicionarComida(int);
     void removerComida();
     void desenharComidas();
     void atualizarComidas();
 
 	void desenhar();
+	void verificaColisoes();
+	
+	static void inicializarImagens();
 };
 
 #endif

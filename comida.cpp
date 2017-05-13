@@ -7,43 +7,40 @@ Comida::Comida(){
     this->altura = 0;
     this->largura = 0;
 
-	// this->tipo = aleatorio(0, 3);
-	this->tipo = hotdog;
+	this->tipo = aleatorio(0, 3);
 	
     if(tipo == chocolate)
-        imagem = al_load_bitmap("chocolate.png");
+        imagem = img_chocolate;
     else if(tipo == sushi)
-        imagem = al_load_bitmap("sushi.png");
+        imagem = img_sushi;
     else if(tipo == pizza)
-        imagem = al_load_bitmap("pizza.png");
+        imagem = img_pizza;
     else if(tipo == hotdog)
-        imagem = al_load_bitmap("hotdog.png");
+        imagem = img_hotdog;
 
 }
 
-Comida::Comida(int x, int y, int velocidade, int altura, int largura){
+Comida::Comida(int x, int y, int velocidade, int altura, int largura, int tipo){
     this->x = x;
     this->y = y;
     this->velocidade = velocidade;
     this->altura = altura;
     this->largura = largura;
 
-    this->tipo = aleatorio(0, 3); // aleatório!
-	this->tipo = hotdog;
+    this->tipo = tipo;
 
     if(tipo == chocolate)
-        imagem = al_load_bitmap("chocolate.png");
+        imagem = img_chocolate;
     else if(tipo == sushi)
-        imagem = al_load_bitmap("sushi.png");
+        imagem = img_sushi;
     else if(tipo == pizza)
-        imagem = al_load_bitmap("pizza.png");
-    else if(tipo == hotdog){
-        imagem = al_load_bitmap("hotdog.png");
-    }
+        imagem = img_pizza;
+    else if(tipo == hotdog)
+        imagem = img_hotdog;
 }
 
 Comida::~Comida(){
-	al_destroy_bitmap(imagem);
+	
 }
 
 void Comida::andar(){
@@ -94,16 +91,27 @@ void Comida::setLargura(int l){
 int Comida::getTipo(){
 	return tipo;
 }
+ALLEGRO_BITMAP* Comida::img_hotdog = NULL;
+ALLEGRO_BITMAP* Comida::img_sushi = NULL;
+ALLEGRO_BITMAP* Comida::img_pizza = NULL;
+ALLEGRO_BITMAP* Comida::img_chocolate = NULL;
+
+
 void Comida::setTipo(int tipo){
 	this->tipo = tipo;
 	if(tipo == chocolate)
-        imagem = al_load_bitmap("chocolate.png");
+        imagem = img_chocolate;
     else if(tipo == sushi)
-        imagem = al_load_bitmap("sushi.png");
+        imagem = img_sushi;
     else if(tipo == pizza)
-        imagem = al_load_bitmap("pizza.png");
+        imagem = img_pizza;
     else if(tipo == hotdog)
-        imagem = al_load_bitmap("hotdog.png");
+        imagem = img_hotdog;
 }
 
-
+void Comida::inicializarImagens(){
+	img_hotdog = al_load_bitmap("hotdog.png");
+	img_pizza = al_load_bitmap("pizza.png");
+	img_chocolate = al_load_bitmap("chocolate.png");
+	img_sushi = al_load_bitmap("sushi.png");
+}

@@ -7,16 +7,16 @@ Caracol::Caracol(){
     this->altura = 0;
     this->largura = 0;
 
-	this->desejo = aleatorio(0, 3); // aleatório!
+	this->desejo = aleatorio(0, 3);
 	
     if(desejo == chocolate)
-        imagem = al_load_bitmap("c_chocolate.png");
+        imagem = img_c_chocolate;
     else if(desejo == sushi)
-        imagem = al_load_bitmap("c_sushi.png");
+        imagem = img_c_sushi;
     else if(desejo == pizza)
-        imagem = al_load_bitmap("c_pizza.png");
+        imagem = img_c_pizza;
     else if(desejo == hotdog)
-        imagem = al_load_bitmap("c_hotdog.png");
+        imagem = img_c_hotdog;
 
 }
 
@@ -27,21 +27,21 @@ Caracol::Caracol(int x, int y, int velocidade, int altura, int largura){
     this->altura = altura;
     this->largura = largura;
 
-    // this->desejo = aleatorio(0, 3); // aleatório!
-	this->desejo = hotdog;
+    this->desejo = aleatorio(0, 3);
 	
     if(desejo == chocolate)
-        imagem = al_load_bitmap("c_chocolate.png");
+        imagem = img_c_chocolate;
     else if(desejo == sushi)
-        imagem = al_load_bitmap("c_sushi.png");
+        imagem = img_c_sushi;
     else if(desejo == pizza)
-        imagem = al_load_bitmap("c_pizza.png");
+        imagem = img_c_pizza;
     else if(desejo == hotdog)
-        imagem = al_load_bitmap("c_hotdog.png");
+        imagem = img_c_hotdog;
+        
 }
 
 Caracol::~Caracol(){
-	al_destroy_bitmap(imagem);
+	
 }
     
 
@@ -97,15 +97,27 @@ int Caracol::getDesejo(){
 void Caracol::setDesejo(int desejo){
 	this->desejo = desejo;
 	if(desejo == chocolate)
-        imagem = al_load_bitmap("c_chocolate.png");
+        imagem = img_c_chocolate;
     else if(desejo == sushi)
-        imagem = al_load_bitmap("c_sushi.png");
+        imagem = img_c_sushi;
     else if(desejo == pizza)
-        imagem = al_load_bitmap("c_pizza.png");
+        imagem = img_c_pizza;
     else if(desejo == hotdog)
-        imagem = al_load_bitmap("c_hotdog.png");
+        imagem = img_c_hotdog;
 }
 
 ALLEGRO_BITMAP* Caracol::getImagem(){
 	return imagem;
+}
+
+ALLEGRO_BITMAP* Caracol::img_c_hotdog = NULL;
+ALLEGRO_BITMAP* Caracol::img_c_sushi = NULL;
+ALLEGRO_BITMAP* Caracol::img_c_pizza = NULL;
+ALLEGRO_BITMAP* Caracol::img_c_chocolate = NULL;
+
+void Caracol::inicializarImagens(){
+	img_c_hotdog = al_load_bitmap("c_hotdog.png");
+	img_c_pizza = al_load_bitmap("c_pizza.png");
+	img_c_chocolate = al_load_bitmap("c_chocolate.png");
+	img_c_sushi = al_load_bitmap("c_sushi.png");
 }
