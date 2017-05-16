@@ -24,8 +24,6 @@ Comida::Comida(int x, int y, int velocidade, int altura, int largura, int tipo){
     this->x = x;
     this->y = y;
     this->velocidade = velocidade;
-    this->altura = altura;
-    this->largura = largura;
 
     this->tipo = tipo;
 
@@ -37,6 +35,9 @@ Comida::Comida(int x, int y, int velocidade, int altura, int largura, int tipo){
         imagem = img_pizza;
     else if(tipo == hotdog)
         imagem = img_hotdog;
+        
+    this->largura = al_get_bitmap_width(imagem);
+    this->altura = al_get_bitmap_height(imagem);
 }
 
 Comida::~Comida(){
@@ -110,8 +111,8 @@ void Comida::setTipo(int tipo){
 }
 
 void Comida::inicializarImagens(){
-	img_hotdog = al_load_bitmap("hotdog.png");
-	img_pizza = al_load_bitmap("pizza.png");
-	img_chocolate = al_load_bitmap("chocolate.png");
-	img_sushi = al_load_bitmap("sushi.png");
+	img_hotdog = al_load_bitmap("imagens/hotdog.png");
+	img_pizza = al_load_bitmap("imagens/pizza.png");
+	img_chocolate = al_load_bitmap("imagens/chocolate.png");
+	img_sushi = al_load_bitmap("imagens/sushi.png");
 }

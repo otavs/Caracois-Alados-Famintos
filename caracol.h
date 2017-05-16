@@ -5,10 +5,10 @@
 
 class Caracol{
 
-    int x, y, velocidade, altura, largura;
-    ALLEGRO_BITMAP *imagem;
+    int x, y, velocidade, altura, largura, contadorImg;
+    ALLEGRO_BITMAP *imagem[2];
     int desejo;
-    static ALLEGRO_BITMAP *img_c_hotdog, *img_c_pizza, *img_c_chocolate, *img_c_sushi;
+    static ALLEGRO_BITMAP *img_c_hotdog[2], *img_c_pizza[2], *img_c_chocolate[2], *img_c_sushi[2];
 
     public:
     Caracol();
@@ -29,7 +29,6 @@ class Caracol{
 	void setLargura(int);
 	int getDesejo();
 	void setDesejo(int);
-	ALLEGRO_BITMAP* getImagem();
 	
 	static void inicializarImagens();
 	

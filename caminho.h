@@ -34,9 +34,13 @@ class Caminho{
     void atualizarComidas();
 
 	void desenhar();
-	void verificaColisoes();
+	void verificaColisoes(int&, int&);
+	
+	void esvaziarFilaCaracois();
+	void esvaziarFilaComidas();
 	
 	static void inicializarImagens();
+	
 };
 
 #endif

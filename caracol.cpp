@@ -6,17 +6,26 @@ Caracol::Caracol(){
     this->velocidade = 0;
     this->altura = 0;
     this->largura = 0;
+    this->contadorImg = 0;
 
 	this->desejo = aleatorio(0, 3);
 	
-    if(desejo == chocolate)
-        imagem = img_c_chocolate;
-    else if(desejo == sushi)
-        imagem = img_c_sushi;
-    else if(desejo == pizza)
-        imagem = img_c_pizza;
-    else if(desejo == hotdog)
-        imagem = img_c_hotdog;
+    if(desejo == chocolate){
+    	imagem[0] = img_c_chocolate[0];
+    	imagem[1] = img_c_chocolate[1];
+	}
+    else if(desejo == sushi){
+    	imagem[0] = img_c_sushi[0];
+    	imagem[1] = img_c_sushi[1];
+	}
+    else if(desejo == pizza){
+    	imagem[0] = img_c_pizza[0];
+    	imagem[1] = img_c_pizza[1];
+	}
+	else if(desejo == hotdog){
+    	imagem[0] = img_c_hotdog[0];
+    	imagem[1] = img_c_hotdog[1];
+	}
 
 }
 
@@ -26,17 +35,26 @@ Caracol::Caracol(int x, int y, int velocidade, int altura, int largura){
     this->velocidade = velocidade;
     this->altura = altura;
     this->largura = largura;
+    this->contadorImg = aleatorio(0, 1);
 
     this->desejo = aleatorio(0, 3);
 	
-    if(desejo == chocolate)
-        imagem = img_c_chocolate;
-    else if(desejo == sushi)
-        imagem = img_c_sushi;
-    else if(desejo == pizza)
-        imagem = img_c_pizza;
-    else if(desejo == hotdog)
-        imagem = img_c_hotdog;
+    if(desejo == chocolate){
+    	imagem[0] = img_c_chocolate[0];
+    	imagem[1] = img_c_chocolate[1];
+	}
+    else if(desejo == sushi){
+    	imagem[0] = img_c_sushi[0];
+    	imagem[1] = img_c_sushi[1];
+	}
+    else if(desejo == pizza){
+    	imagem[0] = img_c_pizza[0];
+    	imagem[1] = img_c_pizza[1];
+	}
+	else if(desejo == hotdog){
+    	imagem[0] = img_c_hotdog[0];
+    	imagem[1] = img_c_hotdog[1];
+	}
         
 }
 
@@ -50,7 +68,10 @@ void Caracol::andar(){
 }
 
 void Caracol::desenhar(){
-    al_draw_bitmap(imagem, x-largura/2, y-altura/2, 0);
+	contadorImg++;
+	if(contadorImg >= 10)
+		contadorImg = 0;
+    al_draw_bitmap(imagem[contadorImg/5], x-largura/2, y-altura/2, 0);
     //al_convert_mask_to_alpha(imagem, al_map_rgb(255, 0, 0));
 }
 
@@ -96,28 +117,36 @@ int Caracol::getDesejo(){
 }
 void Caracol::setDesejo(int desejo){
 	this->desejo = desejo;
-	if(desejo == chocolate)
-        imagem = img_c_chocolate;
-    else if(desejo == sushi)
-        imagem = img_c_sushi;
-    else if(desejo == pizza)
-        imagem = img_c_pizza;
-    else if(desejo == hotdog)
-        imagem = img_c_hotdog;
+	if(desejo == chocolate){
+    	imagem[0] = img_c_chocolate[0];
+    	imagem[1] = img_c_chocolate[1];
+	}
+    else if(desejo == sushi){
+    	imagem[0] = img_c_sushi[0];
+    	imagem[1] = img_c_sushi[1];
+	}
+    else if(desejo == pizza){
+    	imagem[0] = img_c_pizza[0];
+    	imagem[1] = img_c_pizza[1];
+	}
+	else if(desejo == hotdog){
+    	imagem[0] = img_c_hotdog[0];
+    	imagem[1] = img_c_hotdog[1];
+	}
 }
 
-ALLEGRO_BITMAP* Caracol::getImagem(){
-	return imagem;
-}
-
-ALLEGRO_BITMAP* Caracol::img_c_hotdog = NULL;
-ALLEGRO_BITMAP* Caracol::img_c_sushi = NULL;
-ALLEGRO_BITMAP* Caracol::img_c_pizza = NULL;
-ALLEGRO_BITMAP* Caracol::img_c_chocolate = NULL;
+ALLEGRO_BITMAP* Caracol::img_c_hotdog[2];
+ALLEGRO_BITMAP* Caracol::img_c_sushi[2];
+ALLEGRO_BITMAP* Caracol::img_c_chocolate[2];
+ALLEGRO_BITMAP* Caracol::img_c_pizza[2];
 
 void Caracol::inicializarImagens(){
-	img_c_hotdog = al_load_bitmap("c_hotdog.png");
-	img_c_pizza = al_load_bitmap("c_pizza.png");
-	img_c_chocolate = al_load_bitmap("c_chocolate.png");
-	img_c_sushi = al_load_bitmap("c_sushi.png");
+	img_c_hotdog[0] = al_load_bitmap("imagens/c_hotdog0.png");
+	img_c_hotdog[1] = al_load_bitmap("imagens/c_hotdog1.png");
+	img_c_sushi[0] = al_load_bitmap("imagens/c_sushi0.png");
+	img_c_sushi[1] = al_load_bitmap("imagens/c_sushi1.png");
+	img_c_chocolate[0] = al_load_bitmap("imagens/c_chocolate0.png");
+	img_c_chocolate[1] = al_load_bitmap("imagens/c_chocolate1.png");
+	img_c_pizza[0] = al_load_bitmap("imagens/c_pizza0.png");
+	img_c_pizza[1] = al_load_bitmap("imagens/c_pizza1.png");
 }
