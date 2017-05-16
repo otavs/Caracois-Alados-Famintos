@@ -129,5 +129,5 @@ void Caminho::esvaziarFilaComidas(){
 }
 
 void Caminho::inicializarImagens(){
-	img_alien = al_load_bitmap("alien.png");
+	img_alien = al_load_bitmap("imagens/alien.png");
 }
