@@ -5,8 +5,8 @@ Caminho::Caminho(int x0, int y0, int x1, int y1){
     this->y0 = y0;
     this->x1 = x1;
     this->y1 = y1;
-    filaCaracois = Fila<Caracol*>(500);
-    filaComidas = Fila<Comida*>(500);
+    filaCaracois = Fila<Caracol*>(200);
+    filaComidas = Fila<Comida*>(200);
 }
 
 Caminho::~Caminho(){
@@ -90,29 +90,32 @@ void Caminho::desenhar(){
 	al_draw_bitmap(img_alien, x1-100, y0 , 0);
 }
 
-void Caminho::verificaColisoes(int& pontos, int& vidas){
+void Caminho::verificaColisoes(int& pontos, int& vidas, ALLEGRO_SAMPLE *erou, ALLEGRO_SAMPLE *comeu, ALLEGRO_SAMPLE *morreu){
 	if (!filaCaracois.vazia() && !filaComidas.vazia()){
 		if(filaCaracois.primeiroElem()->getX() > filaComidas.primeiroElem()->getX()){
 			if(filaCaracois.primeiroElem()->getDesejo() == filaComidas.primeiroElem()->getTipo()){
+				al_play_sample(comeu, 2, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
 				this->removerCaracol();
 				this->removerComida();
 				pontos++;
 			}
 			else{
 				this->removerComida();
+				al_play_sample(erou, 2, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
 				vidas--;
 			}
 		}
 	}
 	if(!filaCaracois.vazia()){
 		if(filaCaracois.primeiroElem()->getX()+filaCaracois.primeiroElem()->getLargura()/2 > 770){
+			al_play_sample(morreu, 2, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
 			this->removerCaracol();
 			vidas--;
 		}
 	}
 	if(!filaComidas.vazia()){
 		if(filaComidas.primeiroElem()->getX() < 0)
-			this->removerComida();
+			removerComida();
 	}
 }
 

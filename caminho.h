@@ -34,7 +34,7 @@ class Caminho{
     void atualizarComidas();
 
 	void desenhar();
-	void verificaColisoes(int&, int&);
+	void verificaColisoes(int& pontos, int& vidas, ALLEGRO_SAMPLE *erou, ALLEGRO_SAMPLE *comeu, ALLEGRO_SAMPLE *morreu);
 	
 	void esvaziarFilaCaracois();
 	void esvaziarFilaComidas();
